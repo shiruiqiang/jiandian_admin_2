@@ -89,7 +89,6 @@ export default {
     value: {
       handler(val) {
         if (val) {
-          // alert(val)
           // 首先将值转为数组
           const list = Array.isArray(val) ? val : this.value.split(',');
           // 然后将数组转为对象数组
@@ -123,31 +122,24 @@ export default {
     handleRemove(file, fileList) {
       const findex = this.fileList.map(f => f.name).indexOf(file.name);
       if(findex > -1) {
-
         var value_url = this.fileList[findex].url;
-        alert(value_url.substring(value_url.indexOf("/upload")));
         request({
           url: '/common/delete/file?resource=' + value_url.substring(value_url.indexOf("/upload")),
           method: 'get'
         })
-
         this.fileList.splice(findex, 1);
-
         var arrays = this.fileList.map(i => {i.url})
         this.$emit("input", arrays);
       }
     },
     // 上传成功回调
     handleUploadSuccess(res) {
-      debugger
       this.uploadList.push({ name: res.url, url: res.url });
       if (this.uploadList.length === this.number) {
         this.fileList = this.fileList.concat(this.uploadList);
         this.uploadList = [];
         this.number = 0;
-        alert(JSON.stringify(this.fileList));
         var arrays = this.fileList.map(i => {return i.url})
-        alert(JSON.stringify(arrays));
         this.$emit("input", arrays);
         this.$modal.closeLoading();
       }
