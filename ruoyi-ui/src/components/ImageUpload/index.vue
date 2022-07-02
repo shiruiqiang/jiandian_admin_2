@@ -19,7 +19,7 @@
     >
       <i class="el-icon-plus"></i>
     </el-upload>
-    
+
     <!-- 上传提示 -->
     <div class="el-upload__tip" slot="tip" v-if="showTip">
       请上传
@@ -44,6 +44,7 @@
 
 <script>
 import { getToken } from "@/utils/auth";
+import request from '@/utils/request'
 
 export default {
   props: {
@@ -88,12 +89,13 @@ export default {
     value: {
       handler(val) {
         if (val) {
+          // alert(val)
           // 首先将值转为数组
           const list = Array.isArray(val) ? val : this.value.split(',');
           // 然后将数组转为对象数组
           this.fileList = list.map(item => {
             if (typeof item === "string") {
-              if (item.indexOf(this.baseUrl) === -1) {
+              if (item.indexOf("http") === -1) {
                   item = { name: this.baseUrl + item, url: this.baseUrl + item };
               } else {
                   item = { name: item, url: item };
@@ -121,18 +123,32 @@ export default {
     handleRemove(file, fileList) {
       const findex = this.fileList.map(f => f.name).indexOf(file.name);
       if(findex > -1) {
+
+        var value_url = this.fileList[findex].url;
+        alert(value_url.substring(value_url.indexOf("/upload")));
+        request({
+          url: '/common/delete/file?resource=' + value_url.substring(value_url.indexOf("/upload")),
+          method: 'get'
+        })
+
         this.fileList.splice(findex, 1);
-        this.$emit("input", this.listToString(this.fileList));
+
+        var arrays = this.fileList.map(i => {i.url})
+        this.$emit("input", arrays);
       }
     },
     // 上传成功回调
     handleUploadSuccess(res) {
-      this.uploadList.push({ name: res.fileName, url: res.fileName });
+      debugger
+      this.uploadList.push({ name: res.url, url: res.url });
       if (this.uploadList.length === this.number) {
         this.fileList = this.fileList.concat(this.uploadList);
         this.uploadList = [];
         this.number = 0;
-        this.$emit("input", this.listToString(this.fileList));
+        alert(JSON.stringify(this.fileList));
+        var arrays = this.fileList.map(i => {return i.url})
+        alert(JSON.stringify(arrays));
+        this.$emit("input", arrays);
         this.$modal.closeLoading();
       }
     },
