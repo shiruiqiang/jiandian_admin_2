@@ -184,4 +184,17 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
         return Date.from(zdt.toInstant());
     }
+
+    /**
+     * 时间差  秒
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    public static int calLastedTime(Date startDate, Date endDate) {
+        long a = endDate.getTime();
+        long b = startDate.getTime();
+        int c = (int) ((a - b) / 1000);
+        return c;
+    }
 }

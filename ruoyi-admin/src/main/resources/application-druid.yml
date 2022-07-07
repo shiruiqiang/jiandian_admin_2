@@ -55,3 +55,6 @@ spring:
                 wall:
                     config:
                         multi-statement-allow: true
+
+wx_appid: wx7ae215e34951685f
+wx_secret: 4e61e54b87310275736131331f4de783
