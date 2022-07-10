@@ -20,6 +20,8 @@ public interface IXqMemberService
      */
     public XqMember selectXqMemberById(Long id);
 
+    XqMember getMemberbyOpenid(String openid);
+
     /**
      * 查询会员列表
      * 

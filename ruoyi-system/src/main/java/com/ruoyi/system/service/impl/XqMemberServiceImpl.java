@@ -32,6 +32,12 @@ public class XqMemberServiceImpl implements IXqMemberService
         return xqMemberMapper.selectXqMemberById(id);
     }
 
+    @Override
+    public XqMember getMemberbyOpenid(String openid)
+    {
+        return xqMemberMapper.getMemberbyOpenid(openid);
+    }
+
     /**
      * 查询会员列表
      * 

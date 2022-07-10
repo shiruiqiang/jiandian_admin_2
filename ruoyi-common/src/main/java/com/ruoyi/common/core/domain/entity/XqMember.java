@@ -11,7 +11,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 会员对象 xq_member
  * 
  * @author shirq
- * @date 2022-07-02
+ * @date 2022-07-10
  */
 public class XqMember extends BaseEntity
 {
@@ -37,6 +37,7 @@ public class XqMember extends BaseEntity
     private String alias;
 
     /** 性别字符 */
+    @Excel(name = "性别字符")
     private String sexStr;
 
     /** 性别,0=男、1=女 */
@@ -60,6 +61,7 @@ public class XqMember extends BaseEntity
     private String height;
 
     /** 月收入字符 */
+    @Excel(name = "月收入字符")
     private String incomeStr;
 
     /** 月收入 */
@@ -67,6 +69,7 @@ public class XqMember extends BaseEntity
     private String income;
 
     /** 学历字符 */
+    @Excel(name = "学历字符")
     private String educationStr;
 
     /** 学历 */
@@ -78,6 +81,7 @@ public class XqMember extends BaseEntity
     private String hometownStr;
 
     /** 故乡 */
+    @Excel(name = "故乡")
     private String hometown;
 
     /** 工作地字符 */
@@ -85,9 +89,11 @@ public class XqMember extends BaseEntity
     private String workplaceStr;
 
     /** 工作地 */
+    @Excel(name = "工作地")
     private String workplace;
 
     /** 婚姻状况字符 */
+    @Excel(name = "婚姻状况字符")
     private String marriageStr;
 
     /** 婚姻状况 */
@@ -95,6 +101,7 @@ public class XqMember extends BaseEntity
     private String marriage;
 
     /** 是否有小孩，0=否、1=是 */
+    @Excel(name = "是否有小孩，0=否、1=是")
     private String isKid;
 
     /** 职业 */
@@ -102,9 +109,11 @@ public class XqMember extends BaseEntity
     private String occupation;
 
     /** 是否要小孩，0=否、1=是 */
+    @Excel(name = "是否要小孩，0=否、1=是")
     private String isDemandKid;
 
     /** 买车情况字符 */
+    @Excel(name = "买车情况字符")
     private String carStr;
 
     /** 买车情况 */
@@ -112,6 +121,7 @@ public class XqMember extends BaseEntity
     private String car;
 
     /** 买房情况字符 */
+    @Excel(name = "买房情况字符")
     private String houseStr;
 
     /** 买房情况 */
@@ -127,6 +137,7 @@ public class XqMember extends BaseEntity
     private String phone;
 
     /** 宗教信仰字符 */
+    @Excel(name = "宗教信仰字符")
     private String religionStr;
 
     /** 宗教信仰 */
@@ -134,15 +145,19 @@ public class XqMember extends BaseEntity
     private String religion;
 
     /** 是否抽烟，0=否、1=是 */
+    @Excel(name = "是否抽烟，0=否、1=是")
     private String isSmoking;
 
     /** 是否喝酒，0=否、1=是 */
+    @Excel(name = "是否喝酒，0=否、1=是")
     private String isDrink;
 
     /** 头像url */
+    @Excel(name = "头像url")
     private String headPortraitUrl;
 
     /** 相册json */
+    @Excel(name = "相册json")
     private String pictureJson;
 
     /** 身份证号 */
@@ -178,15 +193,19 @@ public class XqMember extends BaseEntity
     private String isIncome;
 
     /** 自我描述 */
+    @Excel(name = "自我描述")
     private String selfDescription;
 
     /** 兴趣爱好 */
+    @Excel(name = "兴趣爱好")
     private String interest;
 
     /** 择偶标准描述 */
+    @Excel(name = "择偶标准描述")
     private String mateCriterionDescription;
 
     /** 家庭背景 */
+    @Excel(name = "家庭背景")
     private String familyBackground;
 
     /** 创建时间 */
@@ -208,8 +227,20 @@ public class XqMember extends BaseEntity
     private String state;
 
     /** 是否隐身，0=否、1=是 */
-    @Excel(name = "是否隐身，0=否、1=是")
     private String isConceal;
+
+    /** 是否有小孩字符串 */
+    private String isKidStr;
+
+    /** 是否要小孩字符串 */
+    private String isDemandKidStr;
+
+    /** 是否抽烟 字符串 */
+    private String isSmokingStr;
+
+    /** 是否喝酒 字符串 */
+    @Excel(name = "是否喝酒 字符串")
+    private String isDrinkStr;
 
     public void setId(Long id) 
     {
@@ -688,6 +719,42 @@ public class XqMember extends BaseEntity
     {
         return isConceal;
     }
+    public void setIsKidStr(String isKidStr) 
+    {
+        this.isKidStr = isKidStr;
+    }
+
+    public String getIsKidStr() 
+    {
+        return isKidStr;
+    }
+    public void setIsDemandKidStr(String isDemandKidStr) 
+    {
+        this.isDemandKidStr = isDemandKidStr;
+    }
+
+    public String getIsDemandKidStr() 
+    {
+        return isDemandKidStr;
+    }
+    public void setIsSmokingStr(String isSmokingStr) 
+    {
+        this.isSmokingStr = isSmokingStr;
+    }
+
+    public String getIsSmokingStr() 
+    {
+        return isSmokingStr;
+    }
+    public void setIsDrinkStr(String isDrinkStr) 
+    {
+        this.isDrinkStr = isDrinkStr;
+    }
+
+    public String getIsDrinkStr() 
+    {
+        return isDrinkStr;
+    }
 
     @Override
     public String toString() {
@@ -746,6 +813,10 @@ public class XqMember extends BaseEntity
             .append("state", getState())
             .append("remark", getRemark())
             .append("isConceal", getIsConceal())
+            .append("isKidStr", getIsKidStr())
+            .append("isDemandKidStr", getIsDemandKidStr())
+            .append("isSmokingStr", getIsSmokingStr())
+            .append("isDrinkStr", getIsDrinkStr())
             .toString();
     }
 }

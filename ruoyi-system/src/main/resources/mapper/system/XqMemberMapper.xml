@@ -59,10 +59,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="state"    column="state"    />
         <result property="remark"    column="remark"    />
         <result property="isConceal"    column="is_conceal"    />
+        <result property="isKidStr"    column="is_kid_str"    />
+        <result property="isDemandKidStr"    column="is_demand_kid_str"    />
+        <result property="isSmokingStr"    column="is_smoking_str"    />
+        <result property="isDrinkStr"    column="is_drink_str"    />
     </resultMap>
 
     <sql id="selectXqMemberVo">
-        select id, weChat_id, weChat_phone, name, alias, sex_str, sex, birth_date, age, weight, height, income_str, income, education_str, education, hometown_str, hometown, workplace_str, workplace, marriage_str, marriage, is_kid, occupation, is_demand_kid, car_str, car, house_str, house, weChat, phone, religion_str, religion, is_smoking, is_drink, head_portrait_url, picture_json, id_card, is_autonym, is_education, is_marriage, is_car, is_house, is_work, is_income, self_description, interest, mate_criterion_description, family_background, createdate, lastdate, is_delete, state, remark, is_conceal from xq_member
+        select id, weChat_id, weChat_phone, name, alias, sex_str, sex, birth_date, age, weight, height, income_str, income, education_str, education, hometown_str, hometown, workplace_str, workplace, marriage_str, marriage, is_kid, occupation, is_demand_kid, car_str, car, house_str, house, weChat, phone, religion_str, religion, is_smoking, is_drink, head_portrait_url, picture_json, id_card, is_autonym, is_education, is_marriage, is_car, is_house, is_work, is_income, self_description, interest, mate_criterion_description, family_background, createdate, lastdate, is_delete, state, remark, is_conceal, is_kid_str, is_demand_kid_str, is_smoking_str, is_drink_str from xq_member
     </sql>
 
     <select id="selectXqMemberList" parameterType="XqMember" resultMap="XqMemberResult">
@@ -72,22 +76,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="wechatPhone != null  and wechatPhone != ''"> and weChat_phone like concat('%', #{wechatPhone}, '%')</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="alias != null  and alias != ''"> and alias like concat('%', #{alias}, '%')</if>
+            <if test="sexStr != null  and sexStr != ''"> and sex_str = #{sexStr}</if>
             <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
             <if test="birthDate != null  and birthDate != ''"> and birth_date = #{birthDate}</if>
             <if test="age != null  and age != ''"> and age = #{age}</if>
             <if test="weight != null  and weight != ''"> and weight = #{weight}</if>
             <if test="height != null  and height != ''"> and height = #{height}</if>
+            <if test="incomeStr != null  and incomeStr != ''"> and income_str = #{incomeStr}</if>
             <if test="income != null  and income != ''"> and income = #{income}</if>
+            <if test="educationStr != null  and educationStr != ''"> and education_str = #{educationStr}</if>
             <if test="education != null  and education != ''"> and education = #{education}</if>
             <if test="hometownStr != null  and hometownStr != ''"> and hometown_str like concat('%', #{hometownStr}, '%')</if>
+            <if test="hometown != null  and hometown != ''"> and hometown = #{hometown}</if>
             <if test="workplaceStr != null  and workplaceStr != ''"> and workplace_str like concat('%', #{workplaceStr}, '%')</if>
+            <if test="workplace != null  and workplace != ''"> and workplace = #{workplace}</if>
+            <if test="marriageStr != null  and marriageStr != ''"> and marriage_str = #{marriageStr}</if>
             <if test="marriage != null  and marriage != ''"> and marriage = #{marriage}</if>
+            <if test="isKid != null  and isKid != ''"> and is_kid = #{isKid}</if>
             <if test="occupation != null  and occupation != ''"> and occupation like concat('%', #{occupation}, '%')</if>
+            <if test="isDemandKid != null  and isDemandKid != ''"> and is_demand_kid = #{isDemandKid}</if>
+            <if test="carStr != null  and carStr != ''"> and car_str = #{carStr}</if>
             <if test="car != null  and car != ''"> and car = #{car}</if>
+            <if test="houseStr != null  and houseStr != ''"> and house_str = #{houseStr}</if>
             <if test="house != null  and house != ''"> and house = #{house}</if>
             <if test="wechat != null  and wechat != ''"> and weChat like concat('%', #{wechat}, '%')</if>
             <if test="phone != null  and phone != ''"> and phone like concat('%', #{phone}, '%')</if>
+            <if test="religionStr != null  and religionStr != ''"> and religion_str = #{religionStr}</if>
             <if test="religion != null  and religion != ''"> and religion = #{religion}</if>
+            <if test="isSmoking != null  and isSmoking != ''"> and is_smoking = #{isSmoking}</if>
+            <if test="isDrink != null  and isDrink != ''"> and is_drink = #{isDrink}</if>
+            <if test="headPortraitUrl != null  and headPortraitUrl != ''"> and head_portrait_url = #{headPortraitUrl}</if>
+            <if test="pictureJson != null  and pictureJson != ''"> and picture_json = #{pictureJson}</if>
             <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
             <if test="isAutonym != null  and isAutonym != ''"> and is_autonym = #{isAutonym}</if>
             <if test="isEducation != null  and isEducation != ''"> and is_education = #{isEducation}</if>
@@ -96,15 +115,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isHouse != null  and isHouse != ''"> and is_house = #{isHouse}</if>
             <if test="isWork != null  and isWork != ''"> and is_work = #{isWork}</if>
             <if test="isIncome != null  and isIncome != ''"> and is_income = #{isIncome}</if>
+            <if test="selfDescription != null  and selfDescription != ''"> and self_description = #{selfDescription}</if>
+            <if test="interest != null  and interest != ''"> and interest = #{interest}</if>
+            <if test="mateCriterionDescription != null  and mateCriterionDescription != ''"> and mate_criterion_description = #{mateCriterionDescription}</if>
+            <if test="familyBackground != null  and familyBackground != ''"> and family_background = #{familyBackground}</if>
+            <if test="createdate != null "> and createdate = #{createdate}</if>
+            <if test="lastdate != null "> and lastdate = #{lastdate}</if>
             <if test="isDelete != null  and isDelete != ''"> and is_delete = #{isDelete}</if>
             <if test="state != null  and state != ''"> and state = #{state}</if>
-            <if test="isConceal != null  and isConceal != ''"> and is_conceal = #{isConceal}</if>
+            <if test="isDrinkStr != null  and isDrinkStr != ''"> and is_drink_str = #{isDrinkStr}</if>
         </where>
     </select>
     
     <select id="selectXqMemberById" parameterType="Long" resultMap="XqMemberResult">
         <include refid="selectXqMemberVo"/>
         where id = #{id}
+    </select>
+
+    <select id="getMemberbyOpenid" parameterType="String" resultMap="XqMemberResult">
+        <include refid="selectXqMemberVo"/>
+        where weChat_id = #{weChat_id}
     </select>
         
     <insert id="insertXqMember" parameterType="XqMember" useGeneratedKeys="true" keyProperty="id">
@@ -163,6 +193,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="state != null">state,</if>
             <if test="remark != null">remark,</if>
             <if test="isConceal != null">is_conceal,</if>
+            <if test="isKidStr != null">is_kid_str,</if>
+            <if test="isDemandKidStr != null">is_demand_kid_str,</if>
+            <if test="isSmokingStr != null">is_smoking_str,</if>
+            <if test="isDrinkStr != null">is_drink_str,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="wechatId != null">#{wechatId},</if>
@@ -218,6 +252,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="state != null">#{state},</if>
             <if test="remark != null">#{remark},</if>
             <if test="isConceal != null">#{isConceal},</if>
+            <if test="isKidStr != null">#{isKidStr},</if>
+            <if test="isDemandKidStr != null">#{isDemandKidStr},</if>
+            <if test="isSmokingStr != null">#{isSmokingStr},</if>
+            <if test="isDrinkStr != null">#{isDrinkStr},</if>
          </trim>
     </insert>
 
@@ -277,6 +315,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="state != null">state = #{state},</if>
             <if test="remark != null">remark = #{remark},</if>
             <if test="isConceal != null">is_conceal = #{isConceal},</if>
+            <if test="isKidStr != null">is_kid_str = #{isKidStr},</if>
+            <if test="isDemandKidStr != null">is_demand_kid_str = #{isDemandKidStr},</if>
+            <if test="isSmokingStr != null">is_smoking_str = #{isSmokingStr},</if>
+            <if test="isDrinkStr != null">is_drink_str = #{isDrinkStr},</if>
         </trim>
         where id = #{id}
     </update>

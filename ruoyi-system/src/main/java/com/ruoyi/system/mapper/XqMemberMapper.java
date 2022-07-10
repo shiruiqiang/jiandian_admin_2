@@ -21,6 +21,14 @@ public interface XqMemberMapper
     public XqMember selectXqMemberById(Long id);
 
     /**
+     * 查询会员
+     *
+     * @param weChat_id
+     * @return 会员
+     */
+    public XqMember getMemberbyOpenid(String weChat_id);
+
+    /**
      * 查询会员列表
      * 
      * @param xqMember 会员

@@ -1,6 +1,7 @@
 package com.ruoyi.web.controller.blinddate;
 
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.entity.XqMember;
 import com.ruoyi.system.service.IFrontService;
 import com.ruoyi.system.service.IXqMemberService;
@@ -26,15 +27,47 @@ public class FrontController extends BaseController {
     private IFrontService frontService;
 
     /**
-     * 保存用户注册信息
+     * 保存、修改用户注册信息
      * @param xqMember
      * @return
      */
     @PostMapping("/member_save")
     @ResponseBody
     public Map memberSave(@RequestBody XqMember xqMember){
-        xqMemberService.insertXqMember(xqMember);
+        try{
+            if(xqMember.getId() > 0){
+                xqMemberService.updateXqMember(xqMember);
+            }else{
+                xqMemberService.insertXqMember(xqMember);
+            }
+        }catch (Exception e){
+            return error(e.getMessage());
+        }
         return success();
+    }
+
+    /**
+     * 获取微信openid
+     * @param openid
+     * @return
+     */
+    @GetMapping("/getMemberbyOpenid")
+    @ResponseBody
+    public Map getMemberbyOpenid(String openid){
+        AjaxResult ajaxResult;
+        try{
+            XqMember xqMember = xqMemberService.getMemberbyOpenid(openid);
+            ajaxResult = success();
+            if(xqMember != null && xqMember.getId() != null && xqMember.getId() > 0){
+                ajaxResult.put(AjaxResult.DATA_TAG , xqMember);
+            }else {
+                throw new Exception("用户不存在");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return error(e.getMessage());
+        }
+        return ajaxResult;
     }
 
 
